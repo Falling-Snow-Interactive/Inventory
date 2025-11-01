@@ -1,16 +1,18 @@
 {
-  "name": "com.fallingsnowinteractive.[PackageLower]",
+  "name": "com.fallingsnowinteractive.inventory",
   "version": "0.0.1",
-  "displayName": "FSI [PackageName]",
-  "description": "[PackageName] package developed by Falling Snow Interactive.",
+  "displayName": "FSI Inventory",
+  "description": "Inventory package developed by Falling Snow Interactive.",
   "unity": "6000.2",
   "unityRelease": "6f2",
-  "keywords": ["[Keyword1]", "[Keyword2]", "[Keyword3]"],
+  "keywords": ["Inventory", "Data", "Management"],
   "author": {
-    "name": "[AuthorName]",
-    "email": "[AuthorEmail]"
+    "name": "Kira Dinan",
+    "email": "kira.dinan@fallingsnowinteractive.ca"
   },
   "hideInEditor": false,
   "dependencies": {
+    "com.fallingsnowinteractive.localization": "0.0.1",
+    "com.fallingsnowinteractive.datasystem": "0.0.1"
   }
 }
