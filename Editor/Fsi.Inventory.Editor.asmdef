@@ -1,0 +1,19 @@
+{
+    "name": "Fsi.Inventory.Editor",
+    "rootNamespace": "Fsi.Inventory",
+    "references": [
+        "GUID:ff3151e387f3d42e1b5e8c10871ccc37",
+        "GUID:47ab5f70213b9465b9ab594657913e27",
+        "GUID:d01539a91a51f41e884d80a7bdf27f86",
+        "GUID:ceb6e2845d6144c74b52e9664ea7fa88"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
