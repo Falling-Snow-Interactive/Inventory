@@ -1,8 +1,9 @@
+using Fsi.Gameplay;
 using UnityEngine;
 
 namespace Fsi.Inventory
 {
-    public class InventoryManager : MonoBehaviour
+    public class InventoryManager : MbSingleton<InventoryManager>
     {
         [SerializeField]
         private Inventory inventory;
