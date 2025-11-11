@@ -33,18 +33,18 @@ namespace Fsi.Inventory
             {
                 return entry.Add(amount);
             }
-            else
-            {
-                entry = new InventoryEntry(item, amount);
-                entries.Add(entry);
-                return true;
-            }
 
-            return false;
+            entry = new InventoryEntry(item, amount);
+            entries.Add(entry);
+            return true;
+            
+            // TODO - Add option for inventory size limit - Kira
         }
 
         public bool RemoveItem(ItemData item, int amount = 1)
         {
+            // TODO - Create key item type that can't just be removed. Ex: Quest items, keys, etc... - Kira
+            
             if (TryGetItem(item, out InventoryEntry entry))
             {
                 return entry.Remove(amount);
@@ -54,6 +54,7 @@ namespace Fsi.Inventory
             return false;
         }
 
+        // TODO - Cache this in a dictionary probably - Kira
         public List<InventoryEntry> GetItemsOfType(ItemCategory category)
         {
             List<InventoryEntry> entries = new();
