@@ -8,6 +8,6 @@ namespace Fsi.Inventory.Items.Selector
     [CustomPropertyDrawer(typeof(ItemSelectorAttribute))]
     public class ItemSelectorAttributeDrawer : SelectorAttributeDrawer<ItemData, string>
     {
-        protected override List<ItemData> GetData() => InventorySettings.Items;
+        protected override List<ItemData> GetEntries() => InventorySettings.Items;
     }
 }
