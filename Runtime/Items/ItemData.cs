@@ -1,19 +1,13 @@
 using Fsi.DataSystem;
 using Fsi.Inventory.Items.Selector;
+using Fsi.Inventory.Selectors;
 using UnityEngine;
 
 namespace Fsi.Inventory.Items
 {
-    [CreateAssetMenu(menuName = "Fsi/Items/Data", fileName = "New Item")]
+    [CreateAssetMenu(menuName = "Fsi/Items/Data", fileName = "New Item Data")]
     public class ItemData : ScriptableData<string>
     {
-        [Header("Information")]
-
-        [ItemCategorySelector]
-        [SerializeField]
-        private ItemCategory category;
-        public ItemCategory Category => category;
-        
         [Header("Visuals")]
 
         [SerializeField]
@@ -23,5 +17,12 @@ namespace Fsi.Inventory.Items
         [SerializeField]
         private Animator visuals;
         public Animator Visuals => visuals;
+        
+        [Header("Information")]
+
+        [InventoryCategory]
+        [SerializeField]
+        private InventoryCategory category;
+        public InventoryCategory Category => category;
     }
 }

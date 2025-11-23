@@ -1,4 +1,4 @@
-using Fsi.Gameplay;
+using Fsi.General;
 using Fsi.Inventory.Items;
 using UnityEngine;
 

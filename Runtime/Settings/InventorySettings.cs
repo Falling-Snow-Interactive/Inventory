@@ -20,8 +20,8 @@ namespace Fsi.Inventory.Settings
         public static List<ItemData> Items => Settings.items;
 
         [SerializeField]
-        private List<ItemCategory> itemCategories = new();
-        public static List<ItemCategory> ItemCategories => Settings.itemCategories;
+        private List<InventoryCategory> itemCategories = new();
+        public static List<InventoryCategory> ItemCategories => Settings.itemCategories;
 
         #region Settings
 

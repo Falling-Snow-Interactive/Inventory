@@ -1,10 +1,10 @@
 using System;
 using Fsi.DataSystem.Selectors;
 
-namespace Fsi.Inventory.Items.Selector
+namespace Fsi.Inventory.Selectors
 {
     [AttributeUsage(AttributeTargets.Field)]
-    public class ItemCategorySelectorAttribute : SelectorAttribute
+    public class InventoryCategoryAttribute : SelectorAttribute
     {
         
     }

@@ -1,5 +1,6 @@
 using System;
 using Fsi.Gameplay;
+using Fsi.General;
 using Fsi.Inventory.Ui;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,8 +9,8 @@ namespace Fsi.Inventory.Gameplay.Ui
 {
     public class GameplayInventoryUi : MbSingleton<GameplayInventoryUi>
     {
-        public static Action<GameplayInventoryUi> InventoryUiOpened;
-        public static Action<GameplayInventoryUi> InventoryUiClosed;
+        public static event Action<GameplayInventoryUi> InventoryUiOpened;
+        public static event Action<GameplayInventoryUi> InventoryUiClosed;
         
         public bool IsOpen { get; private set; }
         

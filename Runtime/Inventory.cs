@@ -55,7 +55,7 @@ namespace Fsi.Inventory
         }
 
         // TODO - Cache this in a dictionary probably - Kira
-        public List<InventoryEntry> GetItemsOfType(ItemCategory category)
+        public List<InventoryEntry> GetItemsOfType(InventoryCategory category)
         {
             List<InventoryEntry> entries = new();
             foreach (InventoryEntry entry in this.entries)
