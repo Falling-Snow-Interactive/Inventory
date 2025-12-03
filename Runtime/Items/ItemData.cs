@@ -5,9 +5,12 @@ using UnityEngine;
 
 namespace Fsi.Inventory.Items
 {
-    [CreateAssetMenu(menuName = "Fsi/Items/Data", fileName = "New Item Data")]
+    [CreateAssetMenu(menuName = Menu + "Data", fileName = "New Item Data")]
     public class ItemData : ScriptableData<string>
     {
+        // Asset Menu
+        private new const string Menu = ScriptableData<string>.Menu + "Items/";
+        
         [Header("Visuals")]
 
         [SerializeField]

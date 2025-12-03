@@ -1,7 +1,7 @@
-using Fsi.Ui.Spacers;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
+using Spacer = Fsi.Ui.Dividers.Spacer;
 
 namespace Fsi.Inventory.Settings
 {
