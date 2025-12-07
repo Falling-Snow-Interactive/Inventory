@@ -5,17 +5,12 @@ using UnityEngine;
 
 namespace Fsi.Inventory.Items
 {
-    [CreateAssetMenu(menuName = Menu + "Data", fileName = "New Item Data")]
-    public class ItemData : ScriptableData<string>
+    // [CreateAssetMenu(menuName = Menu + "Data", fileName = "New Item Data")]
+    public class ItemData<TID> : ScriptableData<TID>
     {
-        // Asset Menu
         private new const string Menu = ScriptableData<string>.Menu + "Items/";
         
         [Header("Visuals")]
-
-        [SerializeField]
-        private Sprite icon;
-        public Sprite Icon => icon;
 
         [SerializeField]
         private Animator visuals;
@@ -25,7 +20,7 @@ namespace Fsi.Inventory.Items
 
         [InventoryCategory]
         [SerializeField]
-        private InventoryCategory category;
-        public InventoryCategory Category => category;
+        private InventoryCategory<TID> category;
+        public InventoryCategory<TID> Category => category;
     }
 }

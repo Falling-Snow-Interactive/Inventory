@@ -2,13 +2,13 @@
     "name": "Fsi.Inventory.Runtime",
     "rootNamespace": "Fsi.Inventory",
     "references": [
+        "GUID:28baa350ed5a94df3a9f583a2fa67b25",
         "GUID:ff3151e387f3d42e1b5e8c10871ccc37",
         "GUID:6055be8ebefd69e48b49212b09b47b2f",
         "GUID:343deaaf83e0cee4ca978e7df0b80d21",
         "GUID:2bafac87e7f4b9b418d9448d219b01ab",
         "GUID:b233fa7d6b0de4d70956927d4f1d5623",
-        "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:28baa350ed5a94df3a9f583a2fa67b25"
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

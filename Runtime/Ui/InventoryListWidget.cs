@@ -1,24 +1,29 @@
 using System;
 using System.Collections.Generic;
+using Fsi.Inventory.Items;
 using UnityEngine;
 
 namespace Fsi.Inventory.Ui
 {
-    public class InventoryListWidget : MonoBehaviour
+    public class InventoryListWidget<TID, TItem, TEntry, TInventory> : MonoBehaviour
+        where TID : Enum
+        where TItem : ItemData<TID>
+        where TEntry : InventoryEntry<TID, TItem>, new()
+        where TInventory : InventoryInstance<TID, TItem, TEntry>
     {
-        private Action<InventoryEntryWidget> onInventoryEntryHighlighted;
+        private Action<InventoryEntryWidget<TID, TItem, TEntry>> onInventoryEntryHighlighted;
         
         [Header("Prefab")]
 
         [SerializeField]
-        private InventoryEntryWidget prefab;
+        private InventoryEntryWidget<TID, TItem, TEntry> prefab;
         
         [Header("References")]
         
         [SerializeField]
         private Transform content;
 
-        public List<InventoryEntryWidget> Entries { get; } = new();
+        public List<InventoryEntryWidget<TID, TItem, TEntry>> Entries { get; } = new();
 
         private void Awake()
         {
@@ -29,15 +34,15 @@ namespace Fsi.Inventory.Ui
             }
         }
 
-        public void Initialize(List<InventoryEntry> entries, Action<InventoryEntryWidget> onEntryHighlighted)
+        public void Initialize(List<TEntry> entries, Action<InventoryEntryWidget<TID, TItem, TEntry>> onEntryHighlighted)
         {
             onInventoryEntryHighlighted = onEntryHighlighted;
 
             ClearEntries();
             
-            foreach (InventoryEntry entry in entries)
+            foreach (TEntry entry in entries)
             {
-                InventoryEntryWidget e = Instantiate(prefab, content);
+                InventoryEntryWidget<TID, TItem, TEntry> e = Instantiate(prefab, content);
                 e.Initialize(entry, OnEntryHighlight);
                 Entries.Add(e);
             }
@@ -45,7 +50,7 @@ namespace Fsi.Inventory.Ui
 
         private void ClearEntries()
         {
-            foreach (InventoryEntryWidget e in Entries)
+            foreach (InventoryEntryWidget<TID, TItem, TEntry> e in Entries)
             {
                 Destroy(e.gameObject);
             }
@@ -53,7 +58,7 @@ namespace Fsi.Inventory.Ui
             Entries.Clear();
         }
 
-        private void OnEntryHighlight(InventoryEntryWidget entry)
+        private void OnEntryHighlight(InventoryEntryWidget<TID, TItem, TEntry> entry)
         {
             onInventoryEntryHighlighted?.Invoke(entry);
         }

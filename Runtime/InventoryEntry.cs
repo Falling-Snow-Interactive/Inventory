@@ -6,7 +6,9 @@ using UnityEngine;
 namespace Fsi.Inventory
 {
     [Serializable]
-    public class InventoryEntry : ISerializationCallbackReceiver
+    public class InventoryEntry<TID, TItem> : ISerializationCallbackReceiver
+        where TID : Enum
+        where TItem : ItemData<TID>
     {
         [HideInInspector]
         [SerializeField]
@@ -14,15 +16,28 @@ namespace Fsi.Inventory
         
         [ItemSelector]
         [SerializeField]
-        private ItemData item;
-        public ItemData Item => item;
+        private TItem item;
+        public TItem Item
+        {
+            get => item;
+            set => item = value;
+        }
 
         [Min(1)]
         [SerializeField]
         private int amount;
-        public int Amount => amount;
+        public int Amount
+        {
+            get => amount;
+            set => amount = value;
+        }
 
-        public InventoryEntry(ItemData item, int amount = 1)
+        public InventoryEntry()
+        {
+            
+        }
+
+        public InventoryEntry(TItem item, int amount = 1)
         {
             this.item = item;
             this.amount = amount;

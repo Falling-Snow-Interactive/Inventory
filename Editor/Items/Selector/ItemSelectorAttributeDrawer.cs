@@ -1,13 +1,12 @@
-using System.Collections.Generic;
+using System;
 using Fsi.DataSystem.Selectors;
-using Fsi.Inventory.Settings;
-using UnityEditor;
 
 namespace Fsi.Inventory.Items.Selector
 {
-    [CustomPropertyDrawer(typeof(ItemSelectorAttribute))]
-    public class ItemSelectorAttributeDrawer : SelectorAttributeDrawer<string, ItemData>
+    // [CustomPropertyDrawer(typeof(ItemSelectorAttribute))]
+    public abstract class ItemSelectorAttributeDrawer<TID, TItem> : SelectorAttributeDrawer<TID, TItem>
+        where TID : Enum
+        where TItem : ItemData<TID>
     {
-        protected override List<ItemData> GetEntries() => InventorySettings.Items;
     }
 }

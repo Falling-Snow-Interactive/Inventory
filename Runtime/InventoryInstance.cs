@@ -6,15 +6,18 @@ using UnityEngine;
 namespace Fsi.Inventory
 {
     [Serializable]
-    public class Inventory
+    public class InventoryInstance<TID, TItem, TEntry>
+        where TID : Enum
+        where TItem : ItemData<TID>
+        where TEntry : InventoryEntry<TID, TItem>, new()
     {
         [SerializeField]
-        private List<InventoryEntry> entries = new();
-        public List<InventoryEntry> Entries => entries;
+        private List<TEntry> entries = new();
+        public List<TEntry> Entries => entries;
 
-        public bool TryGetItem(ItemData item, out InventoryEntry entry)
+        public bool TryGetItem(TItem item, out TEntry entry)
         {
-            foreach (InventoryEntry e in entries)
+            foreach (TEntry e in entries)
             {
                 if (e.Item == item)
                 {
@@ -27,25 +30,29 @@ namespace Fsi.Inventory
             return false;
         }
         
-        public bool AddItem(ItemData item, int amount = 1)
+        public bool AddItem(TItem item, int amount = 1)
         {
-            if (TryGetItem(item, out InventoryEntry entry))
+            if (TryGetItem(item, out TEntry entry))
             {
                 return entry.Add(amount);
             }
 
-            entry = new InventoryEntry(item, amount);
+            entry = new TEntry
+                    {
+                        Item = item,
+                        Amount = amount,
+                    };
             entries.Add(entry);
             return true;
             
             // TODO - Add option for inventory size limit - Kira
         }
 
-        public bool RemoveItem(ItemData item, int amount = 1)
+        public bool RemoveItem(TItem item, int amount = 1)
         {
             // TODO - Create key item type that can't just be removed. Ex: Quest items, keys, etc... - Kira
             
-            if (TryGetItem(item, out InventoryEntry entry))
+            if (TryGetItem(item, out TEntry entry))
             {
                 return entry.Remove(amount);
             }
@@ -55,18 +62,18 @@ namespace Fsi.Inventory
         }
 
         // TODO - Cache this in a dictionary probably - Kira
-        public List<InventoryEntry> GetItemsOfType(InventoryCategory category)
+        public List<TEntry> GetItemsOfType(InventoryCategory<TID> category)
         {
-            List<InventoryEntry> entries = new();
-            foreach (InventoryEntry entry in this.entries)
+            List<TEntry> e = new();
+            foreach (TEntry entry in entries)
             {
                 if (entry.Item.Category == category)
                 {
-                    entries.Add(entry);
+                    e.Add(entry);
                 }
             }
 
-            return entries;
+            return e;
         }
     }
 }

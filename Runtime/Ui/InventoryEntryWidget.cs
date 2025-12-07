@@ -7,12 +7,15 @@ using UnityEngine.UI;
 
 namespace Fsi.Inventory.Ui
 {
-    public class InventoryEntryWidget : MonoBehaviour, ISelectHandler, IPointerEnterHandler
+    public class InventoryEntryWidget<TID, TItem, TEntry> : MonoBehaviour, ISelectHandler, IPointerEnterHandler
+        where TID : Enum
+        where TItem : ItemData<TID>
+        where TEntry : InventoryEntry<TID, TItem>
     {
         // Events 
-        private Action<InventoryEntryWidget> onHighlight;
+        private Action<InventoryEntryWidget<TID, TItem, TEntry>> onHighlight;
         
-        public InventoryEntry Entry { get; private set; }
+        public TEntry Entry { get; private set; }
         
         [Header("References")]
 
@@ -28,7 +31,7 @@ namespace Fsi.Inventory.Ui
         [SerializeField]
         private Button button;
 
-        public void Initialize(InventoryEntry entry, Action<InventoryEntryWidget> onHighlight = null)
+        public void Initialize(TEntry entry, Action<InventoryEntryWidget<TID, TItem, TEntry>> onHighlight = null)
         {
             this.onHighlight = onHighlight;
 

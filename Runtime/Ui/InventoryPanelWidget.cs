@@ -1,22 +1,27 @@
 using System;
+using Fsi.Inventory.Items;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Fsi.Inventory.Ui
 {
-    public class InventoryPanelWidget : MonoBehaviour
+    public class InventoryPanelWidget<TID, TItem, TEntry, TInventory> : MonoBehaviour
+        where TID : Enum
+        where TItem : ItemData<TID>
+        where TEntry : InventoryEntry<TID, TItem>, new()
+        where TInventory : InventoryInstance<TID, TItem, TEntry>
     {
-        private Inventory inventory;
+        private TInventory inventory;
         
         [Header("References")]
 
         [SerializeField]
-        private InventoryListWidget inventoryListWidget;
+        private InventoryListWidget<TID, TItem, TEntry, TInventory> inventoryListWidget;
 
         [SerializeField]
-        private InventoryEntryInformationWidget informationWidget;
+        private InventoryEntryInformationWidget<TID, TItem, TEntry> informationWidget;
         
-        public void Initialize(Inventory inventory)
+        public void Initialize(TInventory inventory)
         {
             this.inventory = inventory;
 
@@ -27,7 +32,7 @@ namespace Fsi.Inventory.Ui
             }
         }
 
-        private void OnInventoryItemHighlight(InventoryEntryWidget highlighted)
+        private void OnInventoryItemHighlight(InventoryEntryWidget<TID, TItem, TEntry> highlighted)
         {
             informationWidget.ShowInformation(highlighted.Entry);
         }

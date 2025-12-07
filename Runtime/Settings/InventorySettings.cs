@@ -1,36 +1,37 @@
 using System.Collections.Generic;
-using Fsi.Inventory.Items;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Fsi.Inventory.Settings
 {
-    public class InventorySettings : ScriptableObject
+    public class InventorySettings<TID, TItem> : ScriptableObject
     {
         private const string ResourcePath = "Settings/InventorySettings";
         private const string FullPath = "Assets/Resources/" + ResourcePath + ".asset";
 
-        private static InventorySettings settings;
-        public static InventorySettings Settings => settings ??= GetOrCreateSettings();
+        private static InventorySettings<TID, TItem> settings;
+        private static InventorySettings<TID, TItem> Settings => settings ??= GetOrCreateSettings();
 
-        [Header("Library")]
-
-        [SerializeField]
-        private List<ItemData> items = new();
-        public static List<ItemData> Items => Settings.items;
+        [Header("Libraries")]
 
         [SerializeField]
-        private List<InventoryCategory> itemCategories = new();
-        public static List<InventoryCategory> ItemCategories => Settings.itemCategories;
+        private List<TItem> items = new();
+        public static List<TItem> Items => Settings.items;
+
+        [FormerlySerializedAs("itemCategories")]
+        [SerializeField]
+        private List<InventoryCategory<TID>> categories = new();
+        public static List<InventoryCategory<TID>> Categories => Settings.categories;
 
         #region Settings
 
-        private static InventorySettings GetOrCreateSettings()
+        private static InventorySettings<TID, TItem> GetOrCreateSettings()
         {
-            InventorySettings settings = Resources.Load<InventorySettings>(ResourcePath);
+            InventorySettings<TID, TItem> s = Resources.Load<InventorySettings<TID, TItem>>(ResourcePath);
 
             #if UNITY_EDITOR
-            if (!settings)
+            if (!s)
             {
                 if (!AssetDatabase.IsValidFolder("Assets/Resources"))
                 {
@@ -42,13 +43,13 @@ namespace Fsi.Inventory.Settings
                     AssetDatabase.CreateFolder("Assets/Resources", "Settings");
                 }
 
-                settings = CreateInstance<InventorySettings>();
-                AssetDatabase.CreateAsset(settings, FullPath);
+                s = CreateInstance<InventorySettings<TID, TItem>>();
+                AssetDatabase.CreateAsset(s, FullPath);
                 AssetDatabase.SaveAssets();
             }
             #endif
 
-            return settings;
+            return s;
         }
 
         #if UNITY_EDITOR
