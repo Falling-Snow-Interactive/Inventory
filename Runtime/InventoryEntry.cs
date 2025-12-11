@@ -14,7 +14,7 @@ namespace Fsi.Inventory
         [SerializeField]
         private string name;
         
-        [ItemSelector]
+        [ItemLibrary]
         [SerializeField]
         private TItem item;
         public TItem Item
