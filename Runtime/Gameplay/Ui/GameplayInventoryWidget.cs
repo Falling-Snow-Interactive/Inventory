@@ -11,7 +11,7 @@ namespace Fsi.Inventory.Gameplay.Ui
         where TID : Enum
         where TItem : ItemData<TID>
         where TEntry : InventoryEntry<TID, TItem>, new()
-        where TInventory : InventoryInstance<TID, TItem, TEntry>
+        where TInventory : Inventory<TID, TItem, TEntry>
     {
         public static event Action<GameplayInventoryWidget<TID, TItem, TEntry, TInventory>> InventoryUiOpened;
         public static event Action<GameplayInventoryWidget<TID, TItem, TEntry, TInventory>> InventoryUiClosed;

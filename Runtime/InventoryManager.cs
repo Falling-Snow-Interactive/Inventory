@@ -10,7 +10,7 @@ namespace Fsi.Inventory
         where TID : Enum
         where TItem : ItemData<TID>
         where TEntry : InventoryEntry<TID, TItem>, new()
-        where TInventory : InventoryInstance<TID, TItem, TEntry>
+        where TInventory : Inventory<TID, TItem, TEntry>
     {
         [SerializeField]
         private TInventory inventory;

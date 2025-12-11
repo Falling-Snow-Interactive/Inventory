@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Fsi.Inventory
 {
     [Serializable]
-    public class InventoryInstance<TID, TItem, TEntry>
+    public abstract class Inventory<TID, TItem, TEntry> //: Instance<TID, TItem>
         where TID : Enum
         where TItem : ItemData<TID>
         where TEntry : InventoryEntry<TID, TItem>, new()
