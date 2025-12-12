@@ -37,7 +37,7 @@ namespace Fsi.Inventory.Ui
 
             Entry = entry;
 
-            iconImage.sprite = entry.Item.Icon;
+            iconImage.sprite = entry.Item.Sprite;
             nameText.text = entry.Item.Name;
             amountText.text = $"x{entry.Amount}";
         }

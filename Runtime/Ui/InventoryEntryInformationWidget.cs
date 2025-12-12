@@ -26,7 +26,7 @@ namespace Fsi.Inventory.Ui
     public void ShowInformation(TEntry inventoryEntry)
     {
         nameText.text = inventoryEntry.Item.Name;
-        sprite.sprite = inventoryEntry.Item.Icon;
+        sprite.sprite = inventoryEntry.Item.Sprite;
         amountText.text = $"x{inventoryEntry.Amount}";
         descriptionText.text = inventoryEntry.Item.Desc;
     }
