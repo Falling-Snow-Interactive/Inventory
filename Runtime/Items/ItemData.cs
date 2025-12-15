@@ -1,5 +1,4 @@
 using Fsi.DataSystem;
-using Fsi.Inventory.Items.Selector;
 using Fsi.Inventory.Selectors;
 using UnityEngine;
 
