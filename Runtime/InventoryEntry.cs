@@ -1,29 +1,21 @@
 using System;
-using Fsi.Inventory.Items;
-using Fsi.Inventory.Items.Selector;
+using Fsi.Inventory;
 using UnityEngine;
 
-namespace Fsi.Inventory
+namespace Fantazee.Inventories
 {
     [Serializable]
-    public class InventoryEntry<TID, TItem> : ISerializationCallbackReceiver
-        where TID : Enum
-        where TItem : ItemData<TID>
+    public class InventoryEntry<T> : ISerializationCallbackReceiver
+        where T : IItem
     {
         [HideInInspector]
         [SerializeField]
         private string name;
         
-        [ItemLibrary]
         [SerializeField]
-        private TItem item;
-        public TItem Item
-        {
-            get => item;
-            set => item = value;
-        }
+        private T value;
+        public T Value => value;
 
-        [Min(1)]
         [SerializeField]
         private int amount;
         public int Amount
@@ -32,47 +24,24 @@ namespace Fsi.Inventory
             set => amount = value;
         }
 
-        public InventoryEntry()
-        {
-            
-        }
+        public bool ShouldRemove => amount <= 0;
 
-        public InventoryEntry(TItem item, int amount = 1)
+        public InventoryEntry(T value, int amount = 1)
         {
-            this.item = item;
+            this.value = value;
             this.amount = amount;
         }
-
-        public bool Add(int amount = 1)
-        {
-            // TODO - Probably want to have a way to enforce inventory limits.
-
-            this.amount += amount;
-            return true;
-        }
-
-        public bool Remove(int amount = 1)
-        {
-            if (amount > this.amount)
-            {
-                Debug.LogWarning($"Inventory | {item.Name}");
-                return false;
-            }
-
-            this.amount -= amount;
-            return true;
-        }
+        
+        #region Object Overrides
 
         public override string ToString()
         {
-            string s = "";
-            if (item)
-            {
-                s = $"{item} - {amount}";
-            }
-
-            return s;
+            return value != null ? $"{value} x{amount}" : "No value";
         }
+        
+        #endregion
+        
+        #region Serialization
 
         public void OnBeforeSerialize()
         {
@@ -80,5 +49,7 @@ namespace Fsi.Inventory
         }
 
         public void OnAfterDeserialize() { }
+        
+        #endregion
     }
 }
